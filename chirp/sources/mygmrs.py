@@ -87,8 +87,11 @@ class MyGMRS(base.NetworkResultRadio):
             r = s.get('https://api.mygmrs.com/repeaters',
                       params=params)
             if r.status_code != 200:
-                status.send_fail('Got error code %i from server' % (
-                    r.status_code))
+                if r.status_code == 403:
+                    status.send_fail('Premium subscription required to use this feature')
+                else:
+                    status.send_fail('Got error code %i from server' % (
+                        r.status_code))
                 return
             resp = r.json()
             if not resp['success']:

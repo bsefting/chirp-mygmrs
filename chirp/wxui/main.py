@@ -838,6 +838,10 @@ class ChirpMain(wx.Frame):
         self.Bind(wx.EVT_MENU, self._menu_query_dm, query_dm_item)
         source_menu.Append(query_dm_item)
 
+        query_mg_item = wx.MenuItem(source_menu, wx.NewId(), 'myGMRS')
+        self.Bind(wx.EVT_MENU,self._menu_query_mg, query_mg_item)
+        source_menu.Append(query_mg_item)
+
         query_prz_item = wx.MenuItem(source_menu, wx.NewId(),
                                      'przemienniki.net')
         self.Bind(wx.EVT_MENU, self._menu_query_prz, query_prz_item)
@@ -1741,6 +1745,9 @@ class ChirpMain(wx.Frame):
 
     def _menu_query_dm(self, event):
         self._do_network_query(query_sources.DMRMARCQueryDialog)
+
+    def _menu_query_mg(self, event):
+        self._do_network_query(query_sources.MyGMRSQueryDialog)
 
     def _menu_query_prz(self, event):
         self._do_network_query(query_sources.PrzemiennikiQueryDialog)
